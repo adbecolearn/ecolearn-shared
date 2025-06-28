@@ -90,7 +90,7 @@ export class Config {
             },
             
             production: {
-                API_BASE_URL: 'https://ecolearn-api.run.app',
+                API_BASE_URL: 'https://ecolearn-api-xxxxx-as.a.run.app',
                 DEBUG_MODE: false,
                 CARBON_TRACKING_ENABLED: true,
                 MOCK_DATA: false,

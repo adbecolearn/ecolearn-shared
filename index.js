@@ -8,6 +8,7 @@ export { Config, config } from './config/Config.js';
 
 // ===== SERVICES =====
 export { ApiService, apiService } from './services/ApiService.js';
+export { EcoLearnAPI, ecoLearnAPI } from './services/EcoLearnAPI.js';
 
 // ===== UTILITIES =====
 // Green Computing
