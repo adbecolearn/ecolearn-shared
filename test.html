@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 EcoLearn Shared Libraries Test</title>
+    
+    <!-- Load CSS -->
+    <link rel="stylesheet" href="styles/base/variables.css">
+    <link rel="stylesheet" href="styles/components/button.css">
+    
+    <style>
+        body {
+            font-family: var(--eco-font-sans);
+            margin: 0;
+            padding: var(--eco-space-8);
+            background-color: var(--eco-gray-50);
+            color: var(--eco-gray-900);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: var(--eco-space-8);
+            border-radius: var(--eco-rounded-lg);
+            box-shadow: var(--eco-shadow-lg);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: var(--eco-space-8);
+        }
+        
+        .section {
+            margin-bottom: var(--eco-space-6);
+            padding: var(--eco-space-4);
+            border: 1px solid var(--eco-gray-200);
+            border-radius: var(--eco-rounded-md);
+        }
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--eco-space-4);
+            margin-top: var(--eco-space-4);
+        }
+        
+        .metrics {
+            background: var(--eco-primary-50);
+            padding: var(--eco-space-4);
+            border-radius: var(--eco-rounded-md);
+            margin-top: var(--eco-space-4);
+        }
+        
+        .carbon-status {
+            display: flex;
+            align-items: center;
+            gap: var(--eco-space-2);
+            margin-top: var(--eco-space-2);
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .status-good { background-color: var(--eco-success-500); }
+        .status-warning { background-color: var(--eco-warning-500); }
+        .status-critical { background-color: var(--eco-error-500); }
+        
+        .log {
+            background: var(--eco-gray-900);
+            color: var(--eco-gray-100);
+            padding: var(--eco-space-4);
+            border-radius: var(--eco-rounded-md);
+            font-family: var(--eco-font-mono);
+            font-size: var(--eco-text-sm);
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: var(--eco-space-4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 EcoLearn Shared Libraries Test</h1>
+            <p>Testing green computing utilities dan components</p>
+        </div>
+
+        <!-- Configuration Test -->
+        <div class="section">
+            <h2>⚙️ Configuration Test</h2>
+            <div id="config-info"></div>
+        </div>
+
+        <!-- Button Components Test -->
+        <div class="section">
+            <h2>🌱 EcoButton Components</h2>
+            <div class="button-grid" id="button-container"></div>
+        </div>
+
+        <!-- Carbon Tracking Test -->
+        <div class="section">
+            <h2>📊 Carbon Tracking</h2>
+            <div id="carbon-info"></div>
+            <div class="metrics" id="carbon-metrics"></div>
+        </div>
+
+        <!-- API Service Test -->
+        <div class="section">
+            <h2>🌐 API Service Test</h2>
+            <div id="api-info"></div>
+            <button id="test-api" class="eco-btn eco-btn--primary eco-btn--medium">Test API Connection</button>
+        </div>
+
+        <!-- Console Log -->
+        <div class="section">
+            <h2>📝 Console Log</h2>
+            <div class="log" id="console-log"></div>
+        </div>
+    </div>
+
+    <!-- Load JavaScript Modules -->
+    <script type="module">
+        import { 
+            initEcoLearn, 
+            config, 
+            carbonTracker, 
+            apiService,
+            EcoButton,
+            getCarbonStatus,
+            getPerformanceMetrics 
+        } from './index.js';
+
+        // Initialize EcoLearn
+        const ecolearn = initEcoLearn({
+            carbonTracking: true,
+            performanceMonitoring: true,
+            debugMode: true
+        });
+
+        // Custom console log to display in page
+        const logContainer = document.getElementById('console-log');
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const logEntry = document.createElement('div');
+            logEntry.textContent = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : arg
+            ).join(' ');
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        };
+
+        // Test Configuration
+        function testConfiguration() {
+            const configInfo = document.getElementById('config-info');
+            configInfo.innerHTML = `
+                <p><strong>Environment:</strong> ${config.getEnvironment()}</p>
+                <p><strong>API URL:</strong> ${config.getApiUrl()}</p>
+                <p><strong>Carbon Tracking:</strong> ${config.get('CARBON_TRACKING_ENABLED') ? '✅ Enabled' : '❌ Disabled'}</p>
+                <p><strong>Institution:</strong> ${config.get('INSTITUTION_NAME')}</p>
+                <p><strong>Academic Year:</strong> ${config.get('ACADEMIC_YEAR')}</p>
+            `;
+            
+            console.log('🔧 Configuration loaded:', config.getAll());
+        }
+
+        // Test Button Components
+        function testButtons() {
+            const container = document.getElementById('button-container');
+            
+            const buttonConfigs = [
+                { text: 'Primary', variant: 'primary', size: 'medium' },
+                { text: 'Secondary', variant: 'secondary', size: 'medium' },
+                { text: 'Success', variant: 'success', size: 'medium' },
+                { text: 'Warning', variant: 'warning', size: 'medium' },
+                { text: 'Danger', variant: 'danger', size: 'medium' },
+                { text: 'Outline', variant: 'outline', size: 'medium' }
+            ];
+
+            buttonConfigs.forEach((config, index) => {
+                const button = new EcoButton({
+                    ...config,
+                    id: `test-btn-${index}`,
+                    onClick: (event, btn) => {
+                        console.log(`🌱 Button clicked: ${config.text}`, btn.getStats());
+                        updateCarbonMetrics();
+                    }
+                });
+                
+                button.appendTo(container);
+            });
+
+            console.log('🌱 EcoButton components created');
+        }
+
+        // Test Carbon Tracking
+        function testCarbonTracking() {
+            const carbonInfo = document.getElementById('carbon-info');
+            carbonInfo.innerHTML = `
+                <p>Carbon tracking is monitoring your environmental impact in real-time.</p>
+                <p>Try clicking buttons and interacting with the page to see metrics update.</p>
+            `;
+
+            // Track some test events
+            carbonTracker.track('page_interaction', { type: 'test' });
+            carbonTracker.track('user_action', { action: 'carbon_test' });
+
+            updateCarbonMetrics();
+            
+            // Update metrics every 5 seconds
+            setInterval(updateCarbonMetrics, 5000);
+            
+            console.log('📊 Carbon tracking initialized');
+        }
+
+        // Update Carbon Metrics Display
+        function updateCarbonMetrics() {
+            const metricsContainer = document.getElementById('carbon-metrics');
+            const carbonStatus = getCarbonStatus();
+            const performanceMetrics = getPerformanceMetrics();
+            
+            const statusClass = `status-${carbonStatus.status}`;
+            
+            metricsContainer.innerHTML = `
+                <div class="carbon-status">
+                    <div class="status-indicator ${statusClass}"></div>
+                    <strong>Carbon Status: ${carbonStatus.status.toUpperCase()}</strong>
+                </div>
+                <p><strong>Carbon Used:</strong> ${carbonStatus.used.toFixed(4)}g CO2 / ${carbonStatus.budget}g (${carbonStatus.percentage.toFixed(1)}%)</p>
+                <p><strong>Total Events:</strong> ${performanceMetrics.totalEvents}</p>
+                <p><strong>Session Duration:</strong> ${(performanceMetrics.sessionDuration / 1000).toFixed(1)}s</p>
+                <p><strong>Avg Carbon/Event:</strong> ${performanceMetrics.averageCarbonPerEvent.toFixed(4)}g CO2</p>
+            `;
+        }
+
+        // Test API Service
+        function testApiService() {
+            const apiInfo = document.getElementById('api-info');
+            const testButton = document.getElementById('test-api');
+            
+            testButton.addEventListener('click', async () => {
+                testButton.textContent = 'Testing...';
+                testButton.disabled = true;
+                
+                try {
+                    // Test health endpoint
+                    const response = await apiService.get('/health');
+                    
+                    apiInfo.innerHTML = `
+                        <p style="color: var(--eco-success-600);">✅ API Connection Successful</p>
+                        <p><strong>Response:</strong> ${JSON.stringify(response, null, 2)}</p>
+                    `;
+                    
+                    console.log('🌐 API test successful:', response);
+                } catch (error) {
+                    apiInfo.innerHTML = `
+                        <p style="color: var(--eco-error-600);">❌ API Connection Failed</p>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p><em>This is expected if backend is not running locally.</em></p>
+                    `;
+                    
+                    console.log('🌐 API test failed (expected):', error.message);
+                } finally {
+                    testButton.textContent = 'Test API Connection';
+                    testButton.disabled = false;
+                }
+            });
+            
+            console.log('🌐 API service test setup complete');
+        }
+
+        // Initialize all tests
+        function initializeTests() {
+            console.log('🚀 Starting EcoLearn Shared Libraries Test');
+            
+            testConfiguration();
+            testButtons();
+            testCarbonTracking();
+            testApiService();
+            
+            console.log('✅ All tests initialized successfully');
+        }
+
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', initializeTests);
+        
+        // Also run immediately since we're using modules
+        initializeTests();
+    </script>
+</body>
+</html>
