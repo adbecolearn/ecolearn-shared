@@ -1,0 +1,348 @@
+/**
+ * 🌱 EcoButton Styles
+ * Green-optimized button component styles
+ */
+
+/* ===== BASE BUTTON STYLES ===== */
+.eco-btn {
+  /* Reset */
+  margin: 0;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  
+  /* Base styles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eco-space-2);
+  
+  font-family: var(--eco-font-sans);
+  font-weight: var(--eco-font-medium);
+  line-height: var(--eco-leading-none);
+  text-align: center;
+  white-space: nowrap;
+  
+  border-radius: var(--eco-rounded-md);
+  transition: all var(--eco-duration-150) var(--eco-ease-in-out);
+  
+  /* Accessibility */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  
+  /* Performance optimization */
+  will-change: transform, box-shadow;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* ===== BUTTON SIZES ===== */
+.eco-btn--small {
+  padding: var(--eco-space-1-5) var(--eco-space-3);
+  font-size: var(--eco-text-sm);
+  min-height: 2rem;
+}
+
+.eco-btn--medium {
+  padding: var(--eco-space-2-5) var(--eco-space-4);
+  font-size: var(--eco-text-base);
+  min-height: 2.5rem;
+}
+
+.eco-btn--large {
+  padding: var(--eco-space-3) var(--eco-space-6);
+  font-size: var(--eco-text-lg);
+  min-height: 3rem;
+}
+
+/* ===== BUTTON VARIANTS ===== */
+
+/* Primary Button */
+.eco-btn--primary {
+  background-color: var(--eco-primary-500);
+  color: white;
+  border: 1px solid var(--eco-primary-500);
+}
+
+.eco-btn--primary:hover:not(:disabled) {
+  background-color: var(--eco-primary-600);
+  border-color: var(--eco-primary-600);
+  transform: translateY(-1px);
+  box-shadow: var(--eco-shadow-md);
+}
+
+.eco-btn--primary:active:not(:disabled) {
+  background-color: var(--eco-primary-700);
+  border-color: var(--eco-primary-700);
+  transform: translateY(0);
+  box-shadow: var(--eco-shadow-sm);
+}
+
+.eco-btn--primary:focus-visible {
+  outline: 2px solid var(--eco-primary-300);
+  outline-offset: 2px;
+}
+
+/* Secondary Button */
+.eco-btn--secondary {
+  background-color: var(--eco-secondary-500);
+  color: white;
+  border: 1px solid var(--eco-secondary-500);
+}
+
+.eco-btn--secondary:hover:not(:disabled) {
+  background-color: var(--eco-secondary-600);
+  border-color: var(--eco-secondary-600);
+  transform: translateY(-1px);
+  box-shadow: var(--eco-shadow-md);
+}
+
+.eco-btn--secondary:active:not(:disabled) {
+  background-color: var(--eco-secondary-700);
+  border-color: var(--eco-secondary-700);
+  transform: translateY(0);
+  box-shadow: var(--eco-shadow-sm);
+}
+
+.eco-btn--secondary:focus-visible {
+  outline: 2px solid var(--eco-secondary-300);
+  outline-offset: 2px;
+}
+
+/* Success Button */
+.eco-btn--success {
+  background-color: var(--eco-success-500);
+  color: white;
+  border: 1px solid var(--eco-success-500);
+}
+
+.eco-btn--success:hover:not(:disabled) {
+  background-color: var(--eco-success-600);
+  border-color: var(--eco-success-600);
+  transform: translateY(-1px);
+  box-shadow: var(--eco-shadow-md);
+}
+
+.eco-btn--success:active:not(:disabled) {
+  background-color: var(--eco-success-700);
+  border-color: var(--eco-success-700);
+  transform: translateY(0);
+  box-shadow: var(--eco-shadow-sm);
+}
+
+.eco-btn--success:focus-visible {
+  outline: 2px solid var(--eco-success-300);
+  outline-offset: 2px;
+}
+
+/* Warning Button */
+.eco-btn--warning {
+  background-color: var(--eco-warning-500);
+  color: white;
+  border: 1px solid var(--eco-warning-500);
+}
+
+.eco-btn--warning:hover:not(:disabled) {
+  background-color: var(--eco-warning-600);
+  border-color: var(--eco-warning-600);
+  transform: translateY(-1px);
+  box-shadow: var(--eco-shadow-md);
+}
+
+.eco-btn--warning:active:not(:disabled) {
+  background-color: var(--eco-warning-700);
+  border-color: var(--eco-warning-700);
+  transform: translateY(0);
+  box-shadow: var(--eco-shadow-sm);
+}
+
+.eco-btn--warning:focus-visible {
+  outline: 2px solid var(--eco-warning-300);
+  outline-offset: 2px;
+}
+
+/* Danger Button */
+.eco-btn--danger {
+  background-color: var(--eco-error-500);
+  color: white;
+  border: 1px solid var(--eco-error-500);
+}
+
+.eco-btn--danger:hover:not(:disabled) {
+  background-color: var(--eco-error-600);
+  border-color: var(--eco-error-600);
+  transform: translateY(-1px);
+  box-shadow: var(--eco-shadow-md);
+}
+
+.eco-btn--danger:active:not(:disabled) {
+  background-color: var(--eco-error-700);
+  border-color: var(--eco-error-700);
+  transform: translateY(0);
+  box-shadow: var(--eco-shadow-sm);
+}
+
+.eco-btn--danger:focus-visible {
+  outline: 2px solid var(--eco-error-300);
+  outline-offset: 2px;
+}
+
+/* Outline Variants */
+.eco-btn--outline {
+  background-color: transparent;
+  border: 1px solid var(--eco-gray-300);
+  color: var(--eco-gray-700);
+}
+
+.eco-btn--outline:hover:not(:disabled) {
+  background-color: var(--eco-gray-50);
+  border-color: var(--eco-gray-400);
+  transform: translateY(-1px);
+  box-shadow: var(--eco-shadow-sm);
+}
+
+.eco-btn--outline:active:not(:disabled) {
+  background-color: var(--eco-gray-100);
+  transform: translateY(0);
+}
+
+/* Ghost Variants */
+.eco-btn--ghost {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--eco-gray-600);
+}
+
+.eco-btn--ghost:hover:not(:disabled) {
+  background-color: var(--eco-gray-100);
+  color: var(--eco-gray-700);
+}
+
+.eco-btn--ghost:active:not(:disabled) {
+  background-color: var(--eco-gray-200);
+}
+
+/* ===== BUTTON STATES ===== */
+
+/* Disabled State */
+.eco-btn:disabled,
+.eco-btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Loading State */
+.eco-btn--loading {
+  cursor: wait;
+  position: relative;
+}
+
+.eco-btn--loading .eco-btn__text {
+  opacity: 0.7;
+}
+
+/* Clicked State */
+.eco-btn--clicked {
+  transform: scale(0.98);
+}
+
+/* ===== BUTTON ELEMENTS ===== */
+
+/* Button Icon */
+.eco-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.eco-btn__icon svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+/* Button Text */
+.eco-btn__text {
+  flex: 1;
+  transition: opacity var(--eco-duration-150) var(--eco-ease-in-out);
+}
+
+/* Loading Spinner */
+.eco-btn__spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: eco-spin 1s linear infinite;
+}
+
+@keyframes eco-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 640px) {
+  .eco-btn--large {
+    padding: var(--eco-space-2-5) var(--eco-space-4);
+    font-size: var(--eco-text-base);
+    min-height: 2.5rem;
+  }
+  
+  .eco-btn--medium {
+    padding: var(--eco-space-2) var(--eco-space-3);
+    font-size: var(--eco-text-sm);
+    min-height: 2.25rem;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .eco-btn {
+    transition: none;
+  }
+  
+  .eco-btn:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .eco-btn--clicked {
+    transform: none;
+  }
+  
+  .eco-btn__spinner {
+    animation: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .eco-btn {
+    border-width: 2px;
+  }
+  
+  .eco-btn:focus-visible {
+    outline-width: 3px;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .eco-btn {
+    background: none !important;
+    color: black !important;
+    border: 1px solid black !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}

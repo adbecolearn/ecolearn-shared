@@ -1,0 +1,92 @@
+{
+  "name": "ecolearn-shared",
+  "version": "1.0.0",
+  "description": "🔧 EcoLearn Shared Libraries & Utilities - Green computing components untuk semua micro frontend",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js",
+    "lint": "eslint . --ext .js",
+    "format": "prettier --write .",
+    "validate": "node scripts/validate.js",
+    "carbon-check": "node scripts/carbon-check.js",
+    "bundle-size": "node scripts/bundle-size.js",
+    "deploy": "node scripts/deploy.js"
+  },
+  "keywords": [
+    "ecolearn",
+    "green-computing",
+    "education",
+    "micro-frontend",
+    "vanilla-js",
+    "carbon-tracking",
+    "sustainability",
+    "digital-business",
+    "akademi-digital-bandung"
+  ],
+  "author": {
+    "name": "Akademi Digital Bandung",
+    "email": "dev@digitalbdg.ac.id",
+    "url": "https://digitalbdg.ac.id"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adbecolearn/ecolearn-shared.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adbecolearn/ecolearn-shared/issues"
+  },
+  "homepage": "https://adbecolearn.github.io/ecolearn-shared/",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "terser": "^5.0.0",
+    "cssnano": "^6.0.0",
+    "postcss": "^8.0.0",
+    "autoprefixer": "^10.0.0"
+  },
+  "files": [
+    "components/",
+    "utils/",
+    "services/",
+    "styles/",
+    "constants/",
+    "analytics/",
+    "i18n/",
+    "config/",
+    "index.js",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./components/*": "./components/*",
+    "./utils/*": "./utils/*",
+    "./services/*": "./services/*",
+    "./styles/*": "./styles/*",
+    "./config/*": "./config/*"
+  },
+  "eco": {
+    "carbonBudget": "50KB",
+    "performanceTarget": "< 500ms",
+    "bundleSize": "< 100KB",
+    "treeshaking": true,
+    "minification": true,
+    "compression": true
+  },
+  "funding": {
+    "type": "institutional",
+    "url": "https://digitalbdg.ac.id/research/ecolearn"
+  }
+}

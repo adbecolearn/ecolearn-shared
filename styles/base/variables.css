@@ -1,0 +1,251 @@
+/**
+ * 🎨 EcoLearn CSS Variables
+ * Green computing design system dengan optimized colors dan spacing
+ */
+
+:root {
+  /* ===== BRAND COLORS ===== */
+  /* Primary Green Computing Colors */
+  --eco-primary-50: #f0f9f0;
+  --eco-primary-100: #dcf2dc;
+  --eco-primary-200: #bce5bc;
+  --eco-primary-300: #8dd18d;
+  --eco-primary-400: #5bb85b;
+  --eco-primary-500: #2d5a27;  /* Main brand color */
+  --eco-primary-600: #254d21;
+  --eco-primary-700: #1f3f1b;
+  --eco-primary-800: #1a3216;
+  --eco-primary-900: #152812;
+
+  /* Secondary Nature Colors */
+  --eco-secondary-50: #f4f7f4;
+  --eco-secondary-100: #e8efe8;
+  --eco-secondary-200: #d1dfd1;
+  --eco-secondary-300: #a8c4a8;
+  --eco-secondary-400: #7fb069;
+  --eco-secondary-500: #4a7c59;  /* Secondary brand */
+  --eco-secondary-600: #3d6647;
+  --eco-secondary-700: #325038;
+  --eco-secondary-800: #28402d;
+  --eco-secondary-900: #203325;
+
+  /* Accent Colors */
+  --eco-accent-light: #7fb069;
+  --eco-accent: #52b788;
+  --eco-accent-dark: #40916c;
+
+  /* ===== SEMANTIC COLORS ===== */
+  /* Success */
+  --eco-success-50: #f0fdf4;
+  --eco-success-100: #dcfce7;
+  --eco-success-200: #bbf7d0;
+  --eco-success-300: #86efac;
+  --eco-success-400: #4ade80;
+  --eco-success-500: #22c55e;
+  --eco-success-600: #16a34a;
+  --eco-success-700: #15803d;
+  --eco-success-800: #166534;
+  --eco-success-900: #14532d;
+
+  /* Warning */
+  --eco-warning-50: #fffbeb;
+  --eco-warning-100: #fef3c7;
+  --eco-warning-200: #fde68a;
+  --eco-warning-300: #fcd34d;
+  --eco-warning-400: #fbbf24;
+  --eco-warning-500: #f59e0b;
+  --eco-warning-600: #d97706;
+  --eco-warning-700: #b45309;
+  --eco-warning-800: #92400e;
+  --eco-warning-900: #78350f;
+
+  /* Error */
+  --eco-error-50: #fef2f2;
+  --eco-error-100: #fee2e2;
+  --eco-error-200: #fecaca;
+  --eco-error-300: #fca5a5;
+  --eco-error-400: #f87171;
+  --eco-error-500: #ef4444;
+  --eco-error-600: #dc2626;
+  --eco-error-700: #b91c1c;
+  --eco-error-800: #991b1b;
+  --eco-error-900: #7f1d1d;
+
+  /* Info */
+  --eco-info-50: #eff6ff;
+  --eco-info-100: #dbeafe;
+  --eco-info-200: #bfdbfe;
+  --eco-info-300: #93c5fd;
+  --eco-info-400: #60a5fa;
+  --eco-info-500: #3b82f6;
+  --eco-info-600: #2563eb;
+  --eco-info-700: #1d4ed8;
+  --eco-info-800: #1e40af;
+  --eco-info-900: #1e3a8a;
+
+  /* ===== NEUTRAL COLORS ===== */
+  /* Gray Scale */
+  --eco-gray-50: #f9fafb;
+  --eco-gray-100: #f3f4f6;
+  --eco-gray-200: #e5e7eb;
+  --eco-gray-300: #d1d5db;
+  --eco-gray-400: #9ca3af;
+  --eco-gray-500: #6b7280;
+  --eco-gray-600: #4b5563;
+  --eco-gray-700: #374151;
+  --eco-gray-800: #1f2937;
+  --eco-gray-900: #111827;
+
+  /* ===== TYPOGRAPHY ===== */
+  /* Font Families */
+  --eco-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --eco-font-mono: 'JetBrains Mono', 'Fira Code', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+
+  /* Font Sizes */
+  --eco-text-xs: 0.75rem;     /* 12px */
+  --eco-text-sm: 0.875rem;    /* 14px */
+  --eco-text-base: 1rem;      /* 16px */
+  --eco-text-lg: 1.125rem;    /* 18px */
+  --eco-text-xl: 1.25rem;     /* 20px */
+  --eco-text-2xl: 1.5rem;     /* 24px */
+  --eco-text-3xl: 1.875rem;   /* 30px */
+  --eco-text-4xl: 2.25rem;    /* 36px */
+  --eco-text-5xl: 3rem;       /* 48px */
+  --eco-text-6xl: 3.75rem;    /* 60px */
+
+  /* Font Weights */
+  --eco-font-thin: 100;
+  --eco-font-light: 300;
+  --eco-font-normal: 400;
+  --eco-font-medium: 500;
+  --eco-font-semibold: 600;
+  --eco-font-bold: 700;
+  --eco-font-extrabold: 800;
+  --eco-font-black: 900;
+
+  /* Line Heights */
+  --eco-leading-none: 1;
+  --eco-leading-tight: 1.25;
+  --eco-leading-snug: 1.375;
+  --eco-leading-normal: 1.5;
+  --eco-leading-relaxed: 1.625;
+  --eco-leading-loose: 2;
+
+  /* ===== SPACING ===== */
+  /* Spacing Scale */
+  --eco-space-0: 0;
+  --eco-space-px: 1px;
+  --eco-space-0-5: 0.125rem;  /* 2px */
+  --eco-space-1: 0.25rem;     /* 4px */
+  --eco-space-1-5: 0.375rem;  /* 6px */
+  --eco-space-2: 0.5rem;      /* 8px */
+  --eco-space-2-5: 0.625rem;  /* 10px */
+  --eco-space-3: 0.75rem;     /* 12px */
+  --eco-space-3-5: 0.875rem;  /* 14px */
+  --eco-space-4: 1rem;        /* 16px */
+  --eco-space-5: 1.25rem;     /* 20px */
+  --eco-space-6: 1.5rem;      /* 24px */
+  --eco-space-7: 1.75rem;     /* 28px */
+  --eco-space-8: 2rem;        /* 32px */
+  --eco-space-9: 2.25rem;     /* 36px */
+  --eco-space-10: 2.5rem;     /* 40px */
+  --eco-space-11: 2.75rem;    /* 44px */
+  --eco-space-12: 3rem;       /* 48px */
+  --eco-space-14: 3.5rem;     /* 56px */
+  --eco-space-16: 4rem;       /* 64px */
+  --eco-space-20: 5rem;       /* 80px */
+  --eco-space-24: 6rem;       /* 96px */
+  --eco-space-28: 7rem;       /* 112px */
+  --eco-space-32: 8rem;       /* 128px */
+
+  /* ===== SIZING ===== */
+  /* Width & Height */
+  --eco-size-auto: auto;
+  --eco-size-full: 100%;
+  --eco-size-screen: 100vh;
+  --eco-size-min: min-content;
+  --eco-size-max: max-content;
+  --eco-size-fit: fit-content;
+
+  /* ===== BORDERS ===== */
+  /* Border Widths */
+  --eco-border-0: 0;
+  --eco-border: 1px;
+  --eco-border-2: 2px;
+  --eco-border-4: 4px;
+  --eco-border-8: 8px;
+
+  /* Border Radius */
+  --eco-rounded-none: 0;
+  --eco-rounded-sm: 0.125rem;   /* 2px */
+  --eco-rounded: 0.25rem;       /* 4px */
+  --eco-rounded-md: 0.375rem;   /* 6px */
+  --eco-rounded-lg: 0.5rem;     /* 8px */
+  --eco-rounded-xl: 0.75rem;    /* 12px */
+  --eco-rounded-2xl: 1rem;      /* 16px */
+  --eco-rounded-3xl: 1.5rem;    /* 24px */
+  --eco-rounded-full: 9999px;
+
+  /* ===== SHADOWS ===== */
+  /* Box Shadows */
+  --eco-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --eco-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --eco-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --eco-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --eco-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --eco-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --eco-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --eco-shadow-none: none;
+
+  /* ===== TRANSITIONS ===== */
+  /* Transition Durations */
+  --eco-duration-75: 75ms;
+  --eco-duration-100: 100ms;
+  --eco-duration-150: 150ms;
+  --eco-duration-200: 200ms;
+  --eco-duration-300: 300ms;
+  --eco-duration-500: 500ms;
+  --eco-duration-700: 700ms;
+  --eco-duration-1000: 1000ms;
+
+  /* Transition Timing Functions */
+  --eco-ease-linear: linear;
+  --eco-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --eco-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --eco-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ===== Z-INDEX ===== */
+  /* Z-Index Scale */
+  --eco-z-0: 0;
+  --eco-z-10: 10;
+  --eco-z-20: 20;
+  --eco-z-30: 30;
+  --eco-z-40: 40;
+  --eco-z-50: 50;
+  --eco-z-auto: auto;
+
+  /* ===== BREAKPOINTS ===== */
+  /* Responsive Breakpoints */
+  --eco-screen-sm: 640px;
+  --eco-screen-md: 768px;
+  --eco-screen-lg: 1024px;
+  --eco-screen-xl: 1280px;
+  --eco-screen-2xl: 1536px;
+
+  /* ===== GREEN COMPUTING SPECIFIC ===== */
+  /* Carbon Status Colors */
+  --eco-carbon-excellent: var(--eco-success-500);
+  --eco-carbon-good: var(--eco-success-400);
+  --eco-carbon-warning: var(--eco-warning-500);
+  --eco-carbon-critical: var(--eco-error-500);
+
+  /* Performance Colors */
+  --eco-perf-fast: var(--eco-success-500);
+  --eco-perf-medium: var(--eco-warning-500);
+  --eco-perf-slow: var(--eco-error-500);
+
+  /* Energy Efficiency Colors */
+  --eco-energy-high: var(--eco-primary-500);
+  --eco-energy-medium: var(--eco-secondary-500);
+  --eco-energy-low: var(--eco-warning-500);
+}

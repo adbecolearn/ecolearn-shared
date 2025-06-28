@@ -1,0 +1,241 @@
+/**
+ * EcoLearn Base Styles - Green Computing Optimized
+ * Minimal CSS for maximum performance
+ */
+
+/* CSS Custom Properties for Green Theme */
+:root {
+  /* Green Computing Color Palette */
+  --eco-primary: #2d5a27;
+  --eco-primary-light: #4a7c59;
+  --eco-primary-dark: #1a3d1a;
+  --eco-secondary: #6b8e23;
+  --eco-accent: #9acd32;
+  --eco-success: #228b22;
+  --eco-warning: #ffa500;
+  --eco-error: #dc143c;
+  
+  /* Neutral Colors */
+  --eco-white: #ffffff;
+  --eco-gray-50: #f9fafb;
+  --eco-gray-100: #f3f4f6;
+  --eco-gray-200: #e5e7eb;
+  --eco-gray-300: #d1d5db;
+  --eco-gray-400: #9ca3af;
+  --eco-gray-500: #6b7280;
+  --eco-gray-600: #4b5563;
+  --eco-gray-700: #374151;
+  --eco-gray-800: #1f2937;
+  --eco-gray-900: #111827;
+  
+  /* Typography */
+  --eco-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --eco-font-size-xs: 0.75rem;
+  --eco-font-size-sm: 0.875rem;
+  --eco-font-size-base: 1rem;
+  --eco-font-size-lg: 1.125rem;
+  --eco-font-size-xl: 1.25rem;
+  --eco-font-size-2xl: 1.5rem;
+  --eco-font-size-3xl: 1.875rem;
+  
+  /* Spacing */
+  --eco-space-1: 0.25rem;
+  --eco-space-2: 0.5rem;
+  --eco-space-3: 0.75rem;
+  --eco-space-4: 1rem;
+  --eco-space-5: 1.25rem;
+  --eco-space-6: 1.5rem;
+  --eco-space-8: 2rem;
+  --eco-space-10: 2.5rem;
+  --eco-space-12: 3rem;
+  
+  /* Border Radius */
+  --eco-radius-sm: 0.125rem;
+  --eco-radius: 0.25rem;
+  --eco-radius-md: 0.375rem;
+  --eco-radius-lg: 0.5rem;
+  --eco-radius-xl: 0.75rem;
+  
+  /* Shadows */
+  --eco-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --eco-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --eco-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  /* Transitions */
+  --eco-transition: all 0.15s ease-in-out;
+}
+
+/* Reset and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--eco-font-family);
+  font-size: var(--eco-font-size-base);
+  line-height: 1.5;
+  color: var(--eco-gray-900);
+  background-color: var(--eco-white);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Green Computing Performance Optimizations */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  loading: lazy; /* Native lazy loading */
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus styles for accessibility */
+:focus {
+  outline: 2px solid var(--eco-primary);
+  outline-offset: 2px;
+}
+
+/* Button Base Styles */
+.eco-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--eco-space-2) var(--eco-space-4);
+  font-family: inherit;
+  font-size: var(--eco-font-size-sm);
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--eco-radius);
+  cursor: pointer;
+  transition: var(--eco-transition);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.eco-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Button Variants */
+.eco-btn--primary {
+  color: var(--eco-white);
+  background-color: var(--eco-primary);
+  border-color: var(--eco-primary);
+}
+
+.eco-btn--primary:hover:not(:disabled) {
+  background-color: var(--eco-primary-dark);
+  border-color: var(--eco-primary-dark);
+}
+
+.eco-btn--secondary {
+  color: var(--eco-primary);
+  background-color: transparent;
+  border-color: var(--eco-primary);
+}
+
+.eco-btn--secondary:hover:not(:disabled) {
+  color: var(--eco-white);
+  background-color: var(--eco-primary);
+}
+
+.eco-btn--success {
+  color: var(--eco-white);
+  background-color: var(--eco-success);
+  border-color: var(--eco-success);
+}
+
+/* Button Sizes */
+.eco-btn--small {
+  padding: var(--eco-space-1) var(--eco-space-3);
+  font-size: var(--eco-font-size-xs);
+}
+
+.eco-btn--large {
+  padding: var(--eco-space-3) var(--eco-space-6);
+  font-size: var(--eco-font-size-lg);
+}
+
+/* Utility Classes */
+.eco-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--eco-space-4);
+}
+
+.eco-text-center {
+  text-align: center;
+}
+
+.eco-text-green {
+  color: var(--eco-primary);
+}
+
+.eco-bg-green {
+  background-color: var(--eco-primary);
+}
+
+.eco-shadow {
+  box-shadow: var(--eco-shadow);
+}
+
+.eco-rounded {
+  border-radius: var(--eco-radius);
+}
+
+/* Green Computing Indicator */
+.eco-carbon-indicator {
+  position: fixed;
+  bottom: var(--eco-space-4);
+  right: var(--eco-space-4);
+  padding: var(--eco-space-2) var(--eco-space-3);
+  background-color: var(--eco-success);
+  color: var(--eco-white);
+  border-radius: var(--eco-radius-lg);
+  font-size: var(--eco-font-size-xs);
+  box-shadow: var(--eco-shadow-md);
+  z-index: 1000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .eco-container {
+    padding: 0 var(--eco-space-3);
+  }
+  
+  .eco-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .eco-carbon-indicator {
+    display: none;
+  }
+}
