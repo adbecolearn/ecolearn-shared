@@ -27,29 +27,29 @@ export class AuthUtils {
         carbonTracker.track('auth_login_attempt', { email });
         
         try {
-            const response = await apiService.post('/v1/auth/login', {
+            const response = await apiService.post('/auth/login', {
                 email,
                 password
             });
 
             if (response.success) {
-                await this.setAuthData(response.token, response.user);
-                carbonTracker.track('auth_login_success', { 
-                    userId: response.user.id,
-                    role: response.user.role 
+                await this.setAuthData(response.data.token, response.data.user);
+                carbonTracker.track('auth_login_success', {
+                    userId: response.data.user.id,
+                    role: response.data.user.role
                 });
-                
+
                 return {
                     success: true,
-                    user: response.user,
-                    redirectUrl: this.getRedirectUrl(response.user.role)
+                    user: response.data.user,
+                    redirectUrl: this.getRedirectUrl(response.data.user.role)
                 };
             } else {
-                carbonTracker.track('auth_login_failed', { 
-                    email, 
-                    reason: response.message 
+                carbonTracker.track('auth_login_failed', {
+                    email,
+                    reason: response.message
                 });
-                
+
                 return {
                     success: false,
                     message: response.message || 'Login failed'
@@ -80,25 +80,25 @@ export class AuthUtils {
         });
         
         try {
-            const response = await apiService.post('/v1/auth/register', userData);
+            const response = await apiService.post('/auth/register', userData);
 
             if (response.success) {
-                carbonTracker.track('auth_register_success', { 
-                    userId: response.user.id,
-                    role: response.user.role 
+                carbonTracker.track('auth_register_success', {
+                    userId: response.data.user.id,
+                    role: response.data.user.role
                 });
-                
+
                 return {
                     success: true,
                     message: 'Registration successful. Please check your email for verification.',
-                    user: response.user
+                    user: response.data.user
                 };
             } else {
-                carbonTracker.track('auth_register_failed', { 
-                    email: userData.email, 
-                    reason: response.message 
+                carbonTracker.track('auth_register_failed', {
+                    email: userData.email,
+                    reason: response.message
                 });
-                
+
                 return {
                     success: false,
                     message: response.message || 'Registration failed'
@@ -129,7 +129,7 @@ export class AuthUtils {
         });
         
         try {
-            await apiService.post('/v1/auth/logout');
+            await apiService.post('/auth/logout');
         } catch (error) {
             console.warn('Logout API call failed:', error);
         }
@@ -236,7 +236,7 @@ export class AuthUtils {
      */
     async refreshToken() {
         try {
-            const response = await apiService.post('/v1/auth/refresh');
+            const response = await apiService.post('/auth/refresh');
             
             if (response.success) {
                 const user = this.getCurrentUser();
