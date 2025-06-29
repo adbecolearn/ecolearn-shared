@@ -104,13 +104,15 @@ async function setupGlobalErrorHandling() {
 /**
  * Setup performance monitoring
  */
-function setupPerformanceMonitoring() {
+async function setupPerformanceMonitoring() {
+    const { carbonTracker } = await import('./utils/green/CarbonTracker.js');
+
     // Monitor page load performance
     if (window.performance && window.performance.timing) {
         window.addEventListener('load', () => {
             const timing = window.performance.timing;
             const loadTime = timing.loadEventEnd - timing.navigationStart;
-            
+
             carbonTracker.track('page_performance', {
                 loadTime,
                 domContentLoaded: timing.domContentLoadedEventEnd - timing.navigationStart,
@@ -125,13 +127,13 @@ function setupPerformanceMonitoring() {
         window.addEventListener('load', () => {
             const resources = window.performance.getEntriesByType('resource');
             let totalSize = 0;
-            
+
             resources.forEach(resource => {
                 if (resource.transferSize) {
                     totalSize += resource.transferSize;
                 }
             });
-            
+
             carbonTracker.track('resource_loading', {
                 totalResources: resources.length,
                 totalSize,
@@ -150,21 +152,22 @@ function setupPerformanceMonitoring() {
  * @returns {Function} Wrapped component factory
  */
 export function createEcoComponent(componentName, componentFactory) {
-    return function(...args) {
+    return async function(...args) {
+        const { carbonTracker } = await import('./utils/green/CarbonTracker.js');
         const startTime = Date.now();
-        
+
         carbonTracker.track('component_create_start', {
             component: componentName
         });
-        
+
         const component = componentFactory(...args);
-        
+
         const creationTime = Date.now() - startTime;
         carbonTracker.track('component_create_end', {
             component: componentName,
             creationTime
         });
-        
+
         return component;
     };
 }
@@ -176,12 +179,13 @@ export function createEcoComponent(componentName, componentFactory) {
  * @returns {Function} Wrapped function
  */
 export function measureEcoPerformance(functionName, fn) {
-    return function(...args) {
+    return async function(...args) {
+        const { carbonTracker } = await import('./utils/green/CarbonTracker.js');
         const startTime = Date.now();
-        
+
         try {
             const result = fn.apply(this, args);
-            
+
             // Handle async functions
             if (result && typeof result.then === 'function') {
                 return result.finally(() => {
@@ -217,7 +221,8 @@ export function measureEcoPerformance(functionName, fn) {
  * Get current carbon footprint status
  * @returns {Object} Carbon status
  */
-export function getCarbonStatus() {
+export async function getCarbonStatus() {
+    const { carbonTracker } = await import('./utils/green/CarbonTracker.js');
     return carbonTracker.getCarbonBudget();
 }
 
@@ -225,7 +230,8 @@ export function getCarbonStatus() {
  * Get performance metrics
  * @returns {Object} Performance metrics
  */
-export function getPerformanceMetrics() {
+export async function getPerformanceMetrics() {
+    const { carbonTracker } = await import('./utils/green/CarbonTracker.js');
     return carbonTracker.getMetrics();
 }
 
