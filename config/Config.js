@@ -90,7 +90,7 @@ export class Config {
             },
             
             production: {
-                API_BASE_URL: 'https://ecolearn-api-xxxxx-as.a.run.app',
+                API_BASE_URL: 'https://asia-southeast2-ecolearn-464318.cloudfunctions.net/domyid',
                 DEBUG_MODE: false,
                 CARBON_TRACKING_ENABLED: true,
                 MOCK_DATA: false,

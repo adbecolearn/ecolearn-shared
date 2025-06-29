@@ -40,20 +40,23 @@ export class EcoLearnAPI {
     }
 
     /**
-     * User logout
-     * @returns {Promise<Object>} Logout response
+     * Verify authentication token
+     * @returns {Promise<Object>} Token verification response
      */
-    async logout() {
-        return this.api.post('/auth/logout');
+    async verifyToken() {
+        return this.api.post('/auth/verify');
     }
 
     /**
-     * Password reset request
-     * @param {string} email User email
-     * @returns {Promise<Object>} Reset response
+     * User logout (client-side only)
+     * @returns {Promise<Object>} Logout response
      */
-    async requestPasswordReset(email) {
-        return this.api.post('/auth/reset-password', { email });
+    async logout() {
+        // Clear local storage and redirect
+        localStorage.removeItem('ecolearn_token');
+        localStorage.removeItem('ecolearn_user');
+        window.location.href = '/ecolearn-auth/';
+        return { success: true, message: 'Logged out successfully' };
     }
 
     // ===== USER MANAGEMENT ENDPOINTS =====
@@ -174,20 +177,27 @@ export class EcoLearnAPI {
 
     /**
      * Get AI chat history
-     * @param {Object} filters Query filters
      * @returns {Promise<Object>} Chat history
      */
-    async getAIChatHistory(filters = {}) {
-        const queryString = new URLSearchParams(filters).toString();
-        return this.api.get(`/ai/chat/history${queryString ? `?${queryString}` : ''}`);
+    async getAIChatHistory() {
+        return this.api.get('/ai/history');
     }
 
     /**
-     * Get AI model status
-     * @returns {Promise<Object>} AI models status
+     * Get available AI models
+     * @returns {Promise<Object>} AI models list
      */
-    async getAIModelStatus() {
-        return this.api.get('/ai/models/status');
+    async getAIModels() {
+        return this.api.get('/ai/models');
+    }
+
+    /**
+     * Analyze content with AI
+     * @param {Object} analysisData Content analysis data
+     * @returns {Promise<Object>} Analysis response
+     */
+    async analyzeContent(analysisData) {
+        return this.api.post('/ai/analyze', analysisData);
     }
 
     /**
@@ -365,6 +375,91 @@ export class EcoLearnAPI {
      */
     async getCarbonLeaderboard() {
         return this.api.get('/carbon/leaderboard');
+    }
+
+    // ===== ANALYTICS ENDPOINTS =====
+
+    /**
+     * Get learning progress analytics
+     * @returns {Promise<Object>} Learning progress data
+     */
+    async getLearningProgress() {
+        return this.api.get('/analytics/progress');
+    }
+
+    /**
+     * Get green computing metrics
+     * @returns {Promise<Object>} Green metrics data
+     */
+    async getGreenMetrics() {
+        return this.api.get('/analytics/green');
+    }
+
+    /**
+     * Get detailed learning analytics
+     * @returns {Promise<Object>} Learning analytics data
+     */
+    async getLearningAnalytics() {
+        return this.api.get('/analytics/learning');
+    }
+
+    /**
+     * Get system analytics (admin only)
+     * @returns {Promise<Object>} System analytics data
+     */
+    async getSystemAnalytics() {
+        return this.api.get('/analytics/system');
+    }
+
+    // ===== COURSE ENDPOINTS =====
+
+    /**
+     * Get available courses
+     * @returns {Promise<Object>} Courses list
+     */
+    async getCourses() {
+        return this.api.get('/courses');
+    }
+
+    /**
+     * Create new course (educator/admin only)
+     * @param {Object} courseData Course data
+     * @returns {Promise<Object>} Course creation response
+     */
+    async createCourse(courseData) {
+        return this.api.post('/courses', courseData);
+    }
+
+    /**
+     * Enroll in course
+     * @param {string} courseId Course ID
+     * @returns {Promise<Object>} Enrollment response
+     */
+    async enrollCourse(courseId) {
+        return this.api.post('/courses/enroll', { course_id: courseId });
+    }
+
+    /**
+     * Get user enrollments
+     * @returns {Promise<Object>} Enrollments list
+     */
+    async getEnrollments() {
+        return this.api.get('/courses/enrollments');
+    }
+
+    /**
+     * Update course progress
+     * @param {string} enrollmentId Enrollment ID
+     * @param {number} progress Progress percentage
+     * @param {number} energyUsed Energy used (optional)
+     * @returns {Promise<Object>} Progress update response
+     */
+    async updateProgress(enrollmentId, progress, energyUsed = 0) {
+        return this.api.put('/courses/progress', {
+            enrollment_id: enrollmentId,
+            progress: progress,
+            energy_used: energyUsed
+        });
     }
 
     // ===== UTILITY METHODS =====
