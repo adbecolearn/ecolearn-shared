@@ -32,13 +32,16 @@ export const BUNDLE_SIZE_LIMIT = 100000; // bytes (100KB)
  * Initialize EcoLearn shared libraries
  * @param {Object} options Initialization options
  */
-export function initEcoLearn(options = {}) {
+export async function initEcoLearn(options = {}) {
     const defaultOptions = {
         carbonTracking: true,
         performanceMonitoring: true,
         debugMode: false,
         ...options
     };
+
+    // Import carbon tracker dynamically to avoid circular dependency
+    const { carbonTracker } = await import('./utils/green/CarbonTracker.js');
 
     // Initialize carbon tracking
     if (defaultOptions.carbonTracking) {
