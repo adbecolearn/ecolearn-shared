@@ -73,16 +73,18 @@ export async function initEcoLearn(options = {}) {
     return {
         version: ECOLEARN_VERSION,
         carbonTracker,
-        config,
-        apiService,
-        authUtils
+        config: await import('./config/Config.js'),
+        apiService: await import('./services/ApiService.js'),
+        authUtils: await import('./utils/auth/AuthUtils.js')
     };
 }
 
 /**
  * Setup global error handling
  */
-function setupGlobalErrorHandling() {
+async function setupGlobalErrorHandling() {
+    const { carbonTracker } = await import('./utils/green/CarbonTracker.js');
+
     window.addEventListener('error', (event) => {
         carbonTracker.track('javascript_error', {
             message: event.message,
@@ -254,20 +256,24 @@ export function getGreenComputingStatus() {
 // Auto-initialize when loaded in browser
 if (typeof window !== 'undefined') {
     // Initialize with default options
-    window.EcoLearn = initEcoLearn();
-    
-    // Make utilities available globally for debugging
-    if (config.isDevelopment()) {
-        window.EcoLearnDebug = {
-            carbonTracker,
-            config,
-            apiService,
-            authUtils,
-            getCarbonStatus,
-            getPerformanceMetrics,
-            getGreenComputingStatus
-        };
-    }
+    initEcoLearn().then((ecolearn) => {
+        window.EcoLearn = ecolearn;
+
+        // Make utilities available globally for debugging
+        import('./config/Config.js').then(({ config }) => {
+            if (config.isDevelopment()) {
+                window.EcoLearnDebug = {
+                    carbonTracker: ecolearn.carbonTracker,
+                    config: ecolearn.config,
+                    apiService: ecolearn.apiService,
+                    authUtils: ecolearn.authUtils,
+                    getCarbonStatus,
+                    getPerformanceMetrics,
+                    getGreenComputingStatus
+                };
+            }
+        });
+    });
 }
 
 // Export default initialization function
