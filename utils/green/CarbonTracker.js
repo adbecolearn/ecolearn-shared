@@ -259,26 +259,10 @@ export class CarbonTracker {
      * @param {Object} event Carbon event
      */
     async sendToAnalytics(event) {
-        try {
-            // Batch events to reduce API calls
-            if (this.events.length % 10 === 0) {
-                const recentEvents = this.events.slice(-10);
-                
-                // Send to backend analytics endpoint
-                await fetch(`${config.getApiUrl()}/v1/analytics/carbon`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        sessionId: this.sessionId,
-                        events: recentEvents,
-                        metrics: this.getMetrics()
-                    })
-                });
-            }
-        } catch (error) {
-            console.warn('Failed to send carbon analytics:', error);
+        // For now, only track locally to avoid unnecessary API calls
+        // Backend analytics are handled separately via /analytics/green endpoint
+        if (this.enabled) {
+            console.log('🌱 Carbon event tracked locally:', event.type, event.carbonGrams);
         }
     }
 
